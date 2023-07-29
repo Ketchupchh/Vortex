@@ -120,7 +120,7 @@ export function Post(post: PostProps): JSX.Element {
             )}
           </AnimatePresence>
           <div className='flex flex-col items-center gap-2'>
-            <UserTooltip avatar modal={modal} id={userId} {...postUserData}>
+            <UserTooltip avatar modal={modal} {...postUserData}>
               <UserAvatar src={photoURL} alt={name} username={username} isBusinessAccount={isBusinessAccount} />
             </UserTooltip>
             {parentPost && (
@@ -130,7 +130,7 @@ export function Post(post: PostProps): JSX.Element {
           <div className='flex min-w-0 flex-col'>
             <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
               <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
-                <UserTooltip modal={modal} id={userId} {...postUserData}>
+                <UserTooltip modal={modal} {...postUserData}>
                   <UserName
                     className='text-light-primary dark:text-dark-primary'
                     name={name}
@@ -140,7 +140,7 @@ export function Post(post: PostProps): JSX.Element {
                     affliates={affliates}
                   />
                 </UserTooltip>
-                <UserTooltip modal={modal} id={userId} {...postUserData}>
+                <UserTooltip modal={modal} {...postUserData}>
                   <UserUsername username={username} />
                 </UserTooltip>
                 <PostDate postLink={postLink} createdAt={createdAt} />
