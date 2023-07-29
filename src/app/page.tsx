@@ -12,6 +12,7 @@ import { useInfiniteScroll } from "@/components/lib/hooks/useInfiniteScroll";
 import { Post } from "@/components/post/post";
 import { Error } from "@/components/ui/error";
 import { Loading } from "@/components/ui/loading";
+import { UpdateUsername } from "@/components/user/update-username";
 import { orderBy, where } from "firebase/firestore";
 import { AnimatePresence } from "framer-motion";
 
@@ -28,7 +29,9 @@ export default function Home() {
   return (
     <MainLayout>
       <MainContainer>
-        <MainHeader title="Home" />
+        <MainHeader title="Home">
+          <UpdateUsername />
+        </MainHeader>
 
         {user && (
           <Input />
