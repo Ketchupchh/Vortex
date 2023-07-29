@@ -15,6 +15,7 @@ export type Post = {
   userReplies: number;
   userReposts: string[];
   user: {
+    id: string;
     userId: string;
     bio: string | null;
     name: string;
@@ -31,8 +32,8 @@ export type Post = {
     totalPhotos: number;
     pinnedPost: string | null;
     coverPhotoURL: string | null;
-    isAdmin: boolean | null;
-    isPrivate: boolean | null;
+    isAdmin: boolean;
+    isPrivate: boolean;
     isBusinessAccount: boolean;
     affliates: UserAffliate;
   }

@@ -81,12 +81,12 @@ export function ViewPost(post: ViewPostProps): JSX.Element {
           </div>
         )}
         <div className='grid grid-cols-[auto,1fr] gap-3'>
-          <UserTooltip avatar id={ownerId} {...postUserData}>
+          <UserTooltip avatar {...postUserData}>
             <UserAvatar src={photoURL} alt={name} username={username} isBusinessAccount={isBusinessAccount} />
           </UserTooltip>
           <div className='flex min-w-0 justify-between'>
             <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
-              <UserTooltip id={ownerId} {...postUserData}>
+              <UserTooltip {...postUserData}>
                 <UserName
                   className='-mb-1'
                   name={name}
@@ -96,7 +96,7 @@ export function ViewPost(post: ViewPostProps): JSX.Element {
                   affliates={affliates}
                 />
               </UserTooltip>
-              <UserTooltip id={ownerId} {...postUserData}>
+              <UserTooltip {...postUserData}>
                 <UserUsername username={username} />
               </UserTooltip>
             </div>

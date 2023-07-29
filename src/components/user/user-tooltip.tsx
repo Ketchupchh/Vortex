@@ -12,7 +12,6 @@ import type { User } from '../lib/types/user';
 
 type UserTooltipProps = Pick<
   User,
-  | 'id'
   | 'bio'
   | 'name'
   | 'verified'
@@ -24,6 +23,7 @@ type UserTooltipProps = Pick<
   | 'isBusinessAccount'
   | 'affliates'
 > & {
+  id: string;
   modal?: boolean;
   avatar?: boolean;
   children: ReactNode;
