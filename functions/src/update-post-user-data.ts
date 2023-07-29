@@ -39,7 +39,7 @@ export const updatePostUserData = regionalFunctions.firestore
             functions.logger.info(`Updating ${id}`)
             batch.update(ref, {
                 user: {
-                    id: userId,
+                    userId: userId,
                     photoURL: userData.photoURL,
                     coverPhotoURL: userData.coverPhotoURL,
                     username: userData.username,

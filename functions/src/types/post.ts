@@ -22,6 +22,7 @@ export type Post = {
   userReplies: number;
   userReposts: string[];
   user: {
+    id: string;
     userId: string;
     bio: string | null;
     name: string;
