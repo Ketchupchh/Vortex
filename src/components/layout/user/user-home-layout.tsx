@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import { variants } from "@/components/user/user-header";
 import { UserNav } from "@/components/user/user-nav";
 import type { ReactNode } from "react";
+import { FollowButton } from "@/components/ui/follow-button";
 
 type UserHomeLayoutProps = {
     children: ReactNode;
@@ -72,6 +73,11 @@ export function UserHomeLayout({
                                 ) : (
                                     <div className="flex gap-2 self-start ml-auto">
                                         <UserShare username={userData?.username} />
+
+                                        <FollowButton
+                                            userTargetId={userData.id}
+                                            userTargetUsername={userData.username}
+                                        />
                                     </div>
                                 )}
                             </div>
