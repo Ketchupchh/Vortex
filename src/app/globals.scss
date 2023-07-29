@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --main-background: var(--dark-background);
+
+    --dark-background: 0 0 0;
+    --light-background: 255 255 255;
+  }
+
+  a,
+  input,
+  button,
+  textarea {
+    --webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    @apply hover-animation bg-main-background text-light-primary dark:text-dark-primary;
+  }
+}
+
+@layer components {
+  .hover-animation {
+    @apply transition-colors duration-200;
+  }
+
+  .blur-picture {
+    @apply hover:brightness-75
+  }
+
+  .custom-button {
+    @apply hover-animation rounded-full disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .custom-underline {
+    @apply hover-animation underline decoration-transparent outline-none transition [text-decoration-thickness:1px] 
+           hover:decoration-inherit focus-visible:decoration-inherit;
+  }
+
+  .trim-alt {
+    @apply overflow-hidden text-ellipsis break-all [display:-webkit-box] [-webkit-line-clamp:1] [-webkit-box-orient:vertical];
+  }
+
+  .menu-container {
+    @apply z-10 rounded-md bg-main-background outline-none 
+           [box-shadow:#65778633_0px_0px_15px,_#65778626_0px_0px_3px_1px] 
+           dark:[box-shadow:#ffffff33_0px_0px_15px,_#ffffff26_0px_0px_3px_1px];
+  }
+
+  .hover-card {
+    @apply hover:bg-black/[0.03] focus-visible:bg-black/[0.03] dark:hover:bg-white/[0.03]
+           dark:focus-visible:bg-white/[0.03];
+  }
+}
