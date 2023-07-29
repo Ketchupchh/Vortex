@@ -91,6 +91,7 @@ export function Input({
       userReplies: 0,
       userReposts: [],
       user: {
+        id: userId,
         userId: userId,
         bio: user.bio,
         name: user.name,
