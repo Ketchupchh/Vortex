@@ -112,7 +112,7 @@ export function Input({
         isPrivate: user.isPrivate,
         isBusinessAccount: user.isBusinessAccount,
         affliates: user.affliates ?? [],
-        blockedUsers: user.blockedUsers
+        blockedUsers: user.blockedUsers ?? []
       }
     };
   
