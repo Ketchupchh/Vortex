@@ -253,15 +253,18 @@ export function PostActions({
                         <TrashIcon className='w-5 h-5' />
                         Delete
                       </Popover.Button>
-                      <Popover.Button
-                        className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
-                                  hover:bg-main-sidebar-background'
-                        as={Button}
-                        onClick={preventBubbling(verified ? handleVerify(close, ownerId) : handleVerify(close, ownerId))}
-                      >
-                        <CheckBadgeIcon className='w-5 h-5' />
-                        {verified ? "Unverify" : "Verify"}
-                      </Popover.Button>
+
+                      {!isOwner && (
+                        <Popover.Button
+                          className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
+                                    hover:bg-main-sidebar-background'
+                          as={Button}
+                          onClick={preventBubbling(verified ? handleVerify(close, ownerId) : handleVerify(close, ownerId))}
+                        >
+                          <CheckBadgeIcon className='w-5 h-5' />
+                          {verified ? "Unverify" : "Verify"}
+                        </Popover.Button>
+                      )}
                     </>
                   )}
                   {isOwner ? (
