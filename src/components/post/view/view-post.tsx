@@ -54,6 +54,8 @@ export function ViewPost(post: ViewPostProps): JSX.Element {
 
   const { id: parentId, username: parentUsername = username } = parent ?? {};
 
+  const isBlocked = user?.blockedUsers?.includes(ownerId) || postUserData.blockedUsers?.includes(user?.id as string);
+
   return (
     <motion.article
       className={cn(
@@ -66,97 +68,108 @@ export function ViewPost(post: ViewPostProps): JSX.Element {
       exit={undefined}
       ref={viewPostRef}
     >
-      <Modal
-        className='flex items-start justify-center'
-        modalClassName='bg-main-background rounded-2xl max-w-xl w-full mt-8 overflow-hidden'
-        open={open}
-        closeModal={closeModal}
-      >
-        <PostReplyModal post={post} closeModal={closeModal} />
-      </Modal>
-      <div className='flex flex-col gap-2'>
-        {reply && (
-          <div className='flex w-12 items-center justify-center'>
-            <i className='hover-animation h-2 w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
+      {isBlocked ? (
+        <>
+          <div className='w-full h-full bg-neutral-800 rounded-md p-2'>
+            <p>You are unable to view this Post because this account owner limits who can view their Posts.</p>
           </div>
-        )}
-        <div className='grid grid-cols-[auto,1fr] gap-3'>
-          <UserTooltip avatar {...postUserData}>
-            <UserAvatar src={photoURL} alt={name} username={username} isBusinessAccount={isBusinessAccount} />
-          </UserTooltip>
-          <div className='flex min-w-0 justify-between'>
-            <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
-              <UserTooltip {...postUserData}>
-                <UserName
-                  className='-mb-1'
-                  name={name}
-                  username={username}
-                  verified={verified}
-                  isBusinessAccount={isBusinessAccount}
-                  affliates={affliates}
-                />
+          <Input reply parent={{ id: postId, username: username }} />
+        </>
+      ) : (
+        <>
+          <Modal
+            className='flex items-start justify-center'
+            modalClassName='bg-main-background rounded-2xl max-w-xl w-full mt-8 overflow-hidden'
+            open={open}
+            closeModal={closeModal}
+          >
+            <PostReplyModal post={post} closeModal={closeModal} />
+          </Modal>
+          <div className='flex flex-col gap-2'>
+            {reply && (
+              <div className='flex w-12 items-center justify-center'>
+                <i className='hover-animation h-2 w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
+              </div>
+            )}
+            <div className='grid grid-cols-[auto,1fr] gap-3'>
+              <UserTooltip avatar {...postUserData}>
+                <UserAvatar src={photoURL} alt={name} username={username} isBusinessAccount={isBusinessAccount} />
               </UserTooltip>
-              <UserTooltip {...postUserData}>
-                <UserUsername username={username} />
-              </UserTooltip>
+              <div className='flex min-w-0 justify-between'>
+                <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
+                  <UserTooltip {...postUserData}>
+                    <UserName
+                      className='-mb-1'
+                      name={name}
+                      username={username}
+                      verified={verified}
+                      isBusinessAccount={isBusinessAccount}
+                      affliates={affliates}
+                    />
+                  </UserTooltip>
+                  <UserTooltip {...postUserData}>
+                    <UserUsername username={username} />
+                  </UserTooltip>
+                </div>
+                <div className='px-4'>
+                  <PostActions
+                    viewPost
+                    isOwner={isOwner}
+                    ownerId={ownerId}
+                    postId={postId}
+                    parentId={parentId}
+                    username={username}
+                    hasImages={!!images}
+                    createdBy={createdBy}
+                    verified={verified}
+                  />
+                </div>
+              </div>
             </div>
-            <div className='px-4'>
-              <PostActions
+          </div>
+          {reply && (
+            <p className='text-light-secondary dark:text-dark-secondary'>
+              Replying to{' '}
+              <Link
+                className='custom-underline text-main-accent'
+                href={`/user/${parentUsername}`}
+              >
+                @{parentUsername}
+              </Link>
+            </p>
+          )}
+          <div>
+            {text && (
+              <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
+            )}
+            {images && (
+              <ImagePreview
                 viewPost
+                imagesPreview={images}
+                previewCount={images.length}
+              />
+            )}
+            <div
+              className='inner:hover-animation inner:border-b inner:border-light-border
+                        dark:inner:border-dark-border'
+            >
+              <PostDate viewPost postLink={postLink} createdAt={createdAt} />
+              <PostStats
+                viewPost
+                reply={reply}
+                userId={userId}
                 isOwner={isOwner}
-                ownerId={ownerId}
                 postId={postId}
-                parentId={parentId}
-                username={username}
-                hasImages={!!images}
-                createdBy={createdBy}
-                verified={verified}
+                userLikes={userLikes}
+                userReposts={userReposts}
+                userReplies={userReplies}
+                openModal={openModal}
               />
             </div>
+            <Input reply parent={{ id: postId, username: username }} />
           </div>
-        </div>
-      </div>
-      {reply && (
-        <p className='text-light-secondary dark:text-dark-secondary'>
-          Replying to{' '}
-          <Link
-            className='custom-underline text-main-accent'
-            href={`/user/${parentUsername}`}
-          >
-            @{parentUsername}
-          </Link>
-        </p>
+        </>
       )}
-      <div>
-        {text && (
-          <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
-        )}
-        {images && (
-          <ImagePreview
-            viewPost
-            imagesPreview={images}
-            previewCount={images.length}
-          />
-        )}
-        <div
-          className='inner:hover-animation inner:border-b inner:border-light-border
-                     dark:inner:border-dark-border'
-        >
-          <PostDate viewPost postLink={postLink} createdAt={createdAt} />
-          <PostStats
-            viewPost
-            reply={reply}
-            userId={userId}
-            isOwner={isOwner}
-            postId={postId}
-            userLikes={userLikes}
-            userReposts={userReposts}
-            userReplies={userReplies}
-            openModal={openModal}
-          />
-        </div>
-        <Input reply parent={{ id: postId, username: username }} />
-      </div>
     </motion.article>
   );
 }

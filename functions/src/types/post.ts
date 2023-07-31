@@ -43,6 +43,7 @@ export type Post = {
     isPrivate: boolean | null;
     isBusinessAccount: boolean;
     affliates: UserAffliate;
+    blockedUsers: string[];
   }
 };
 

@@ -22,7 +22,8 @@ export const updatePostUserData = regionalFunctions.firestore
             beforeUserData.verified === userData.verified &&
             beforeUserData.isPrivate === userData.isPrivate &&
             beforeUserData.isBusinessAccount === userData.isBusinessAccount &&
-            beforeUserData.affliates === userData.affliates
+            beforeUserData.affliates === userData.affliates &&
+            beforeUserData.blockedUsers === userData.blockedUsers
         ) return;
 
         const batch = firestore().batch();
@@ -51,7 +52,8 @@ export const updatePostUserData = regionalFunctions.firestore
                     verified: userData.verified,
                     private: userData.isPrivate,
                     isBusinessAccount: userData.isBusinessAccount,
-                    affliates: userData.affliates ?? []
+                    affliates: userData.affliates ?? [],
+                    blockedUsers: userData.blockedUsers
                 },
             })
         })

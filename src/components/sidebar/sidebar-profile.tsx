@@ -43,7 +43,7 @@ export function SidebarProfile() : JSX.Element
                         >
                             {user && (
                                 <div className='flex gap-3 truncate'>
-                                    <UserAvatar className='w-12 h-12' src={user.photoURL} alt={user.username} isBusinessAccount={user.isBusinessAccount} />
+                                    <UserAvatar className='flex w-14 h-14' src={user.photoURL} alt={user.username} isBusinessAccount={user.isBusinessAccount} />
                                     <div className='hidden truncate text-start leading-xl xl:block text-dark-secondary'>
                                         <UserName
                                             className='text-white start-0'

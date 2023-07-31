@@ -9,16 +9,48 @@ import { ToolTip } from '../ui/tooltip';
 import { variants } from '../post/post-actions';
 import { CustomIcon } from '../ui/custom-icon';
 import { LinkIcon } from '@heroicons/react/24/solid';
+import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { usersCollection } from '../lib/firebase/collections';
 
 type UserShareProps = {
+  id: string;
+  currUserId: string;
   username: string;
+  isOwner: boolean;
+  isBlocked: boolean
 };
 
-export function UserShare({ username }: UserShareProps): JSX.Element {
+export function UserShare({
+  id,
+  currUserId,
+  username,
+  isOwner,
+  isBlocked
+} : UserShareProps): JSX.Element {
   const handleCopy = (closeMenu: () => void) => async (): Promise<void> => {
     closeMenu();
     await navigator.clipboard.writeText(`${siteURL}/user/${username}`);
     toast.success('Copied to clipboard');
+  };
+
+  const handleBlock = (closeMenu: () => void) => async (): Promise<void> => {
+    closeMenu();
+
+    const currUserRef = doc(usersCollection, currUserId);
+    const userRef = doc(usersCollection, id);
+
+    await Promise.all([
+      updateDoc(currUserRef, {
+        blockedUsers: isBlocked ? arrayRemove(id) : arrayUnion(id),
+        followers: arrayRemove(id),
+        following: arrayRemove(id)
+      }),
+      updateDoc(userRef, {
+        followers: arrayRemove(currUserId),
+        following: arrayRemove(currUserId)
+      })
+    ]);
+    toast.success(`You ${isBlocked ? "Unblocked" : "Blocked"} @${username}`);
   };
 
   return (
@@ -39,22 +71,34 @@ export function UserShare({ username }: UserShareProps): JSX.Element {
           </Popover.Button>
           <AnimatePresence>
             {open && (
-              <Popover.Panel
-                className='menu-container group absolute right-0 top-11 whitespace-nowrap
-                           text-light-primary dark:text-dark-primary'
-                as={motion.div}
-                {...variants}
-                static
-              >
-                <Popover.Button
-                  className='flex w-full gap-3 rounded-md rounded-b-none p-4 hover:bg-main-sidebar-background'
-                  as={Button}
-                  onClick={preventBubbling(handleCopy(close))}
+              <>
+                <Popover.Panel
+                  className='menu-container group absolute right-0 top-11 whitespace-nowrap
+                            text-light-primary dark:text-dark-primary'
+                  as={motion.div}
+                  {...variants}
+                  static
                 >
-                  <LinkIcon className='w-6 h-6' />
-                  Copy link to Profile
-                </Popover.Button>
-              </Popover.Panel>
+                  {!isOwner && (
+                    <Popover.Button
+                      className='flex w-full gap-3 rounded-md rounded-b-none p-4 hover:bg-main-sidebar-background'
+                      as={Button}
+                      onClick={preventBubbling(handleBlock(close))}
+                    >
+                      <CustomIcon iconName='BanIcon' />
+                      {isBlocked ? "Unblock " : "Block "} @{username}
+                    </Popover.Button>
+                  )}
+                  <Popover.Button
+                    className='flex w-full gap-3 rounded-md rounded-b-none p-4 hover:bg-main-sidebar-background'
+                    as={Button}
+                    onClick={preventBubbling(handleCopy(close))}
+                  >
+                    <LinkIcon className='w-6 h-6' />
+                    Copy link to Profile
+                  </Popover.Button>
+                </Popover.Panel>
+              </>
             )}
           </AnimatePresence>
         </>

@@ -73,6 +73,8 @@ export function Post(post: PostProps): JSX.Element {
   const reply = !!parent;
   const postIsReposted = userReposts.includes(profileId ?? '');
 
+  const isBlocked = user?.blockedUsers?.includes(ownerId) || postUserData.blockedUsers?.includes(user?.id as string);
+
   return (
     <motion.article
       {...(!modal ? { ...variants, layout: 'position' } : {})}
@@ -100,108 +102,114 @@ export function Post(post: PostProps): JSX.Element {
         onClick={delayScroll(200)}
         href={postLink} scroll={!reply}
       >
-        <div className='grid grid-cols-[auto,1fr] gap-x-3 gap-y-1'>
-          <AnimatePresence initial={false}>
-            {modal ? null : pinned ? (
-              <PostStatus type='pin'>
-                <p className='text-sm font-bold'>Pinned Post</p>
-              </PostStatus>
-            ) : (
-              postIsReposted && (
-                <PostStatus type='post'>
-                  <Link
-                    className='custom-underline truncate text-sm font-bold'
-                    href={profileUsername as string}
-                  >
-                    {userId === profileId ? 'You' : profileName} RePosted
-                  </Link>
+        {isBlocked ? (
+          <div className='w-full h-full bg-neutral-800 rounded-md p-2'>
+            <p>You are unable to view this Post because this account owner limits who can view their Posts.</p>
+          </div>
+        ) : (
+          <div className='grid grid-cols-[auto,1fr] gap-x-3 gap-y-1'>
+            <AnimatePresence initial={false}>
+              {modal ? null : pinned ? (
+                <PostStatus type='pin'>
+                  <p className='text-sm font-bold'>Pinned Post</p>
                 </PostStatus>
-              )
-            )}
-          </AnimatePresence>
-          <div className='flex flex-col items-center gap-2'>
-            <UserTooltip avatar modal={modal} {...postUserData}>
-              <UserAvatar src={photoURL} alt={name} username={username} isBusinessAccount={isBusinessAccount} />
-            </UserTooltip>
-            {parentPost && (
-              <i className='hover-animation h-full w-0.5 bg-neutral-500 dark:bg-dark-line-reply' />
-            )}
-          </div>
-          <div className='flex min-w-0 flex-col'>
-            <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
-              <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
-                <UserTooltip modal={modal} {...postUserData}>
-                  <UserName
-                    className='text-light-primary dark:text-dark-primary'
-                    name={name}
-                    username={username}
-                    verified={verified}
-                    isBusinessAccount={isBusinessAccount}
-                    affliates={affliates}
-                  />
-                </UserTooltip>
-                <UserTooltip modal={modal} {...postUserData}>
-                  <UserUsername username={username} />
-                </UserTooltip>
-                <PostDate postLink={postLink} createdAt={createdAt} />
-              </div>
-              <div className='px-4'>
-                {!modal && (
-                  <PostActions
-                    isOwner={isOwner}
-                    ownerId={ownerId}
-                    postId={postId}
-                    parentId={parentId}
-                    username={username}
-                    hasImages={!!images}
-                    createdBy={createdBy}
-                    verified={verified}
-                  />
-                )}
-              </div>
+              ) : (
+                postIsReposted && (
+                  <PostStatus type='post'>
+                    <Link
+                      className='custom-underline truncate text-sm font-bold'
+                      href={profileUsername as string}
+                    >
+                      {userId === profileId ? 'You' : profileName} RePosted
+                    </Link>
+                  </PostStatus>
+                )
+              )}
+            </AnimatePresence>
+            <div className='flex flex-col items-center gap-2'>
+              <UserTooltip avatar modal={modal} {...postUserData}>
+                <UserAvatar src={photoURL} alt={name} username={username} isBusinessAccount={isBusinessAccount} />
+              </UserTooltip>
+              {parentPost && (
+                <i className='hover-animation h-full w-0.5 bg-neutral-500 dark:bg-dark-line-reply' />
+              )}
             </div>
-            {(reply || modal) && (
-              <p
-                className={cn(
-                  'text-light-secondary dark:text-dark-secondary',
-                  modal && 'order-1 my-2'
-                )}
-              >
-                Replying to{' '}
-                <Link
-                  className='custom-underline text-main-accent'
-                  href={`/user/${parentUsername}`}
+            <div className='flex min-w-0 flex-col'>
+              <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
+                <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
+                  <UserTooltip modal={modal} {...postUserData}>
+                    <UserName
+                      className='text-light-primary dark:text-dark-primary'
+                      name={name}
+                      username={username}
+                      verified={verified}
+                      isBusinessAccount={isBusinessAccount}
+                      affliates={affliates}
+                    />
+                  </UserTooltip>
+                  <UserTooltip modal={modal} {...postUserData}>
+                    <UserUsername username={username} />
+                  </UserTooltip>
+                  <PostDate postLink={postLink} createdAt={createdAt} />
+                </div>
+                <div className='px-4'>
+                  {!modal && (
+                    <PostActions
+                      isOwner={isOwner}
+                      ownerId={ownerId}
+                      postId={postId}
+                      parentId={parentId}
+                      username={username}
+                      hasImages={!!images}
+                      createdBy={createdBy}
+                      verified={verified}
+                    />
+                  )}
+                </div>
+              </div>
+              {(reply || modal) && (
+                <p
+                  className={cn(
+                    'text-light-secondary dark:text-dark-secondary',
+                    modal && 'order-1 my-2'
+                  )}
                 >
-                  @{parentUsername}
-                </Link>
-              </p>
-            )}
-            {text && (
-              <p className='whitespace-pre-line break-words'>{text}</p>
-            )}
-            <div className='mt-1 flex flex-col gap-2'>
-              {images && (
-                <ImagePreview
-                  post
-                  imagesPreview={images}
-                  previewCount={images.length}
-                />
+                  Replying to{' '}
+                  <Link
+                    className='custom-underline text-main-accent'
+                    href={`/user/${parentUsername}`}
+                  >
+                    @{parentUsername}
+                  </Link>
+                </p>
               )}
-              {!modal && (
-                <PostStats
-                  reply={reply}
-                  userId={userId}
-                  isOwner={isOwner}
-                  postId={postId}
-                  userLikes={userLikes}
-                  userReplies={userReplies}
-                  userReposts={userReposts}
-                  openModal={!parent ? openModal : undefined}
-                />
+              {text && (
+                <p className='whitespace-pre-line break-words'>{text}</p>
               )}
+              <div className='mt-1 flex flex-col gap-2'>
+                {images && (
+                  <ImagePreview
+                    post
+                    imagesPreview={images}
+                    previewCount={images.length}
+                  />
+                )}
+                {!modal && (
+                  <PostStats
+                    reply={reply}
+                    userId={userId}
+                    isOwner={isOwner}
+                    postId={postId}
+                    userLikes={userLikes}
+                    userReplies={userReplies}
+                    userReposts={userReposts}
+                    openModal={!parent ? openModal : undefined}
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Link>
     </motion.article>
   );

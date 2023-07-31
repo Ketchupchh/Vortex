@@ -85,8 +85,8 @@ export function ImagePreview({
       className={cn(
         'grid grid-cols-2 grid-rows-2 rounded-2xl',
         viewPost
-          ? 'h-[51vw] xs:h-[42vw] md:h-[305px] overflow-hidden'
-          : 'h-[42vw] xs:h-[37vw] md:h-[271px] overflow-hidden',
+          ? 'h-[51vw] xs:h-[42vw] md:h-[305px]'
+          : 'h-[42vw] xs:h-[37vw] md:h-[271px]',
           isPost ? 'mt-2 gap-0.5' : 'gap-3'
       )}
     >

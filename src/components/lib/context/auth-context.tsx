@@ -94,7 +94,8 @@ export function AuthContextProvider({
           coverPhotoURL: null,
           isAdmin: false,
           isPrivate: false,
-          isBusinessAccount: false
+          isBusinessAccount: false,
+          blockedUsers: []
         };
 
         const userStatsData: WithFieldValue<Stats> = {

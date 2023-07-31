@@ -36,7 +36,7 @@ export function UserDetails({
     following,
     followers,
     isBusinessAccount,
-    affliates
+    affliates,
 } : UserDetailsProps) : JSX.Element
 {
 

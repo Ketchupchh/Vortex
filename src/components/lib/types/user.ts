@@ -22,6 +22,7 @@ export type User = {
   isPrivate: boolean;
   isBusinessAccount: boolean;
   affliates: UserAffliate;
+  blockedUsers: string[];
 };
 
 export type EditableData = Extract<
