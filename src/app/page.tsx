@@ -2,6 +2,8 @@
 
 import { Aside } from "@/components/aside/aside";
 import { AsideFooter } from "@/components/aside/aside-footer";
+import { SearchBar } from "@/components/aside/search-bar";
+import { Suggestions } from "@/components/aside/suggestions";
 import { MainHeader } from "@/components/header/main-header";
 import { Input } from "@/components/input/input";
 import { MainContainer } from "@/components/layout/main-container";
@@ -56,6 +58,8 @@ export default function Home() {
 
       </MainContainer>
       <Aside>
+        <SearchBar />
+        <Suggestions />
         <AsideFooter />
       </Aside>
     </MainLayout>

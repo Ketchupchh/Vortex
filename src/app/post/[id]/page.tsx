@@ -20,6 +20,8 @@ import { Aside } from "@/components/aside/aside";
 import { AsideFooter } from "@/components/aside/aside-footer";
 import { SEO } from "@/components/common/seo";
 import { siteURL } from "@/components/lib/env";
+import { Suggestions } from "@/components/aside/suggestions";
+import { SearchBar } from "@/components/aside/search-bar";
 
 export default function UserPost()
 {
@@ -92,6 +94,8 @@ export default function UserPost()
                 </section>
             </MainContainer>
             <Aside>
+                <SearchBar />
+                <Suggestions />
                 <AsideFooter />
             </Aside>
         </MainLayout>

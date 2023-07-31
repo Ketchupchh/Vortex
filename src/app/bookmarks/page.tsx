@@ -24,6 +24,8 @@ import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/solid';
 import { Aside } from '@/components/aside/aside';
 import { AsideFooter } from '@/components/aside/aside-footer';
 import { SEO } from '@/components/common/seo';
+import { Suggestions } from '@/components/aside/suggestions';
+import { SearchBar } from '@/components/aside/search-bar';
 
 export default function Bookmarks(): JSX.Element {
   const { user } = useAuth();
@@ -111,6 +113,8 @@ export default function Bookmarks(): JSX.Element {
         </section>
       </MainContainer>
       <Aside>
+        <SearchBar />
+        <Suggestions />
         <AsideFooter />
       </Aside>
     </MainLayout>

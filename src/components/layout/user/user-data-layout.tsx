@@ -12,6 +12,8 @@ import { MainLayout } from "../main-layout";
 import { Aside } from "@/components/aside/aside";
 import { AsideFooter } from "@/components/aside/aside-footer";
 import type { ReactNode } from "react";
+import { Suggestions } from "@/components/aside/suggestions";
+import { SearchBar } from "@/components/aside/search-bar";
 
 type UserDataLayoutProps = {
     children: ReactNode;
@@ -41,6 +43,8 @@ export function UserDataLayout({
                     {children}
                 </MainContainer>
                 <Aside>
+                    <SearchBar />
+                    <Suggestions />
                     <AsideFooter />
                 </Aside>
             </MainLayout>
