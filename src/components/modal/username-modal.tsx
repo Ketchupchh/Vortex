@@ -43,8 +43,8 @@ export function UsernameModal({
     >
       <div className='flex flex-col gap-6'>
         <div className='flex flex-col gap-4'>
-          <i className='mx-auto'>
-            <CustomIcon className='h-10 w-10' iconName='VortexLogo' />
+          <i className='mx-auto -mt-10'>
+            <CustomIcon className='h-24 w-24' iconName='VortexLogo' />
           </i>
           <div className='flex flex-col gap-2'>
             <Dialog.Title className='text-2xl font-bold xs:text-3xl sm:text-4xl'>

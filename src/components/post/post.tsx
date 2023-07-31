@@ -155,6 +155,7 @@ export function Post(post: PostProps): JSX.Element {
                     username={username}
                     hasImages={!!images}
                     createdBy={createdBy}
+                    verified={verified}
                   />
                 )}
               </div>

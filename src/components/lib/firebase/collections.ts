@@ -8,6 +8,7 @@ import { db } from './app';
 import type { CollectionReference } from 'firebase/firestore';
 import type { Bookmark } from '../types/bookmark';
 import type { Stats } from '../types/stats';
+import type { Affliate } from '../types/affliate';
 
 export const usersCollection = collection(db, 'users').withConverter(
   userConverter
@@ -31,4 +32,8 @@ export function userBookmarksCollection(
 
 export function userStatsCollection(id: string): CollectionReference<Stats> {
   return collection(db, `users/${id}/stats`).withConverter(statsConverter);
+}
+
+export function userAffliatesCollection(id: string) : CollectionReference<Affliate> {
+  return collection(db, `/users/${id}/affliates`).withConverter(affliateConverter);
 }

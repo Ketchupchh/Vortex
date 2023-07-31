@@ -21,13 +21,16 @@ import {
   usersCollection,
   postsCollection,
   userStatsCollection,
-  userBookmarksCollection
+  userBookmarksCollection,
+  userAffliatesCollection,
+  affliatesCollection
 } from './collections';
 import { userConverter } from '../types/user';
 import type { WithFieldValue, Query } from 'firebase/firestore';
 import type { EditableUserData, User } from '../types/user';
 import type { FilesWithId, ImagesPreview } from '../types/file';
 import type { Bookmark } from '../types/bookmark';
+import type { Affliate } from '../types/affliate';
 
 export async function checkUsernameAvailability(
   username: string

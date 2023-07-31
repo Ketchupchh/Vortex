@@ -6,7 +6,7 @@ export default function SettingsPage() : JSX.Element
 {
     return (
         <MainLayout>
-            <MainContainer className="relative w-[50rem]">
+            <MainContainer className="relative max-w-[60rem]">
                 <div className="w-full p-5 mb-10">
                     <h1 className="text-xl font-bold">Settings</h1>
                 </div>

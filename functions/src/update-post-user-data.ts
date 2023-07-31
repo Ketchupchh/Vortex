@@ -51,7 +51,7 @@ export const updatePostUserData = regionalFunctions.firestore
                     verified: userData.verified,
                     private: userData.isPrivate,
                     isBusinessAccount: userData.isBusinessAccount,
-                    affliates: userData.affliates
+                    affliates: userData.affliates ?? []
                 },
             })
         })

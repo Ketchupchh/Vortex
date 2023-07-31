@@ -16,7 +16,9 @@ import {
   manageFollow,
   managePinnedPost,
   manageTotalPosts,
-  manageTotalPhotos
+  manageTotalPhotos,
+  verifyUser,
+  unverifyUser
 } from '../lib/firebase/utils';
 import { delayScroll, preventBubbling, sleep } from '../lib/utils';
 import { Modal } from '@/components/modal/modal';
@@ -27,7 +29,7 @@ import { CustomIcon } from '@/components/ui/custom-icon';
 import type { Variants } from 'framer-motion';
 import type { Post } from '../lib/types/post';
 import type { User } from '../lib/types/user';
-import { TrashIcon, UserMinusIcon } from '@heroicons/react/24/solid';
+import { CheckBadgeIcon, TrashIcon, UserMinusIcon } from '@heroicons/react/24/solid';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: -25 },
@@ -47,6 +49,7 @@ type PostActionsProps = Pick<Post, 'createdBy'> & {
   parentId?: string;
   hasImages: boolean;
   viewPost?: boolean;
+  verified: boolean;
 };
 
 type PinModalData = Record<'title' | 'description' | 'mainBtnLabel', string>;
@@ -74,6 +77,7 @@ export function PostActions({
   username,
   hasImages,
   viewPost,
+  verified,
   createdBy
 }: PostActionsProps): JSX.Element {
   const { user } = useAuth();
@@ -142,6 +146,25 @@ export function PostActions({
 
       toast.success(
         `You ${type === 'follow' ? 'followed' : 'unfollowed'} @${username}`
+      );
+    };
+
+  const handleVerify =
+    (closeMenu: () => void, id: string, ) =>
+    async (): Promise<void> => {
+
+      closeMenu();
+
+      console.log(verified)
+
+      await Promise.all([
+        verified ? unverifyUser(id) : verifyUser(id)
+      ])
+      //if(verified) await verifyUser(id);
+      //await unverifyUser(id);
+
+      toast.success(
+        `You ${verified === false ? 'verified' : 'unverified'} @${username}`
       );
     };
 
@@ -220,15 +243,26 @@ export function PostActions({
                   static
                 >
                   {(isAdmin || isOwner) && (
-                    <Popover.Button
-                      className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
-                                 hover:bg-main-sidebar-background'
-                      as={Button}
-                      onClick={preventBubbling(removeOpenModal)}
-                    >
-                      <TrashIcon className='w-5 h-5' />
-                      Delete
-                    </Popover.Button>
+                    <>
+                      <Popover.Button
+                        className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
+                                  hover:bg-main-sidebar-background'
+                        as={Button}
+                        onClick={preventBubbling(removeOpenModal)}
+                      >
+                        <TrashIcon className='w-5 h-5' />
+                        Delete
+                      </Popover.Button>
+                      <Popover.Button
+                        className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
+                                  hover:bg-main-sidebar-background'
+                        as={Button}
+                        onClick={preventBubbling(verified ? handleVerify(close, ownerId) : handleVerify(close, ownerId))}
+                      >
+                        <CheckBadgeIcon className='w-5 h-5' />
+                        {verified ? "Unverify" : "Verify"}
+                      </Popover.Button>
+                    </>
                   )}
                   {isOwner ? (
                     <Popover.Button

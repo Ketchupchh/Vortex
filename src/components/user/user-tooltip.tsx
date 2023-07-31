@@ -23,6 +23,7 @@ type UserTooltipProps = Pick<
   | 'isBusinessAccount'
   | 'affliates'
 > & {
+  userId?: string;
   id: string;
   modal?: boolean;
   avatar?: boolean;
@@ -33,6 +34,7 @@ type Stats = [string, string, number];
 
 export function UserTooltip({
   id,
+  userId,
   bio,
   name,
   modal,
@@ -105,7 +107,7 @@ export function UserTooltip({
                   isBusinessAccount={isBusinessAccount}
                 />
               </div>
-              <FollowButton userTargetId={id} userTargetUsername={username} />
+              <FollowButton userTargetId={userId ? userId : id} userTargetUsername={username} />
             </div>
             <div>
               <UserName

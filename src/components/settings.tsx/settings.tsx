@@ -79,8 +79,7 @@ export function Settings() : JSX.Element
                 <CreateAffliateModal closeModal={closeAdminModal} />
             </Modal>
             <Modal
-                className='flex justify-center items-center w-full h-full'
-                modalClassName='w-[40rem] h-[40rem] bg-black rounded-xl overflow-hidden'
+                modalClassName='w-[40rem] h-[40rem] bg-black rounded-2xl overflow-hidden overflow-y-auto'
                 open={openBusiness}
                 closeModal={closeBusinessModal}
             >

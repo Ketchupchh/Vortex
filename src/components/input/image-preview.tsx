@@ -85,8 +85,8 @@ export function ImagePreview({
       className={cn(
         'grid grid-cols-2 grid-rows-2 rounded-2xl',
         viewPost
-          ? 'h-[51vw] xs:h-[42vw] md:h-[305px]'
-          : 'h-[42vw] xs:h-[37vw] md:h-[271px]',
+          ? 'h-[51vw] xs:h-[42vw] md:h-[305px] overflow-hidden'
+          : 'h-[42vw] xs:h-[37vw] md:h-[271px] overflow-hidden',
           isPost ? 'mt-2 gap-0.5' : 'gap-3'
       )}
     >
@@ -120,7 +120,7 @@ export function ImagePreview({
                 'col-span-2 row-span-2': previewCount === 1,
                 'row-span-2':
                   previewCount === 2 || (index === 0 && previewCount === 3)
-              }
+              },
             )}
             {...variants}
             onClick={preventBubbling(handleSelectedImage(index))}

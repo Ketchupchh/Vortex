@@ -4,7 +4,7 @@ import type { KeyboardEvent, ChangeEvent } from 'react';
 
 export type InputFieldProps = {
   label: string;
-  inputId: EditableData | Extract<keyof User, 'username'>;
+  inputId?: EditableData | Extract<keyof User, 'username'>;
   inputValue: string | null;
   inputLimit?: number;
   useTextArea?: boolean;
@@ -41,7 +41,7 @@ export function InputField({
           errorMessage
             ? 'ring-accent-red'
             : `ring-light-line-reply focus-within:ring-2 
-                 focus-within:!ring-main-accent dark:ring-dark-border`
+                 focus-within:!ring-white/50 dark:ring-dark-border`
         )}
       >
         {useTextArea ? (
@@ -49,7 +49,7 @@ export function InputField({
             className='peer mt-6 w-full resize-none bg-inherit px-3 pb-1
                        placeholder-transparent outline-none transition'
             id={inputId}
-            placeholder={inputId}
+            placeholder={inputId ?? label}
             onChange={!isHittingInputLimit ? handleChange : undefined}
             onKeyUp={handleKeyboardShortcut}
             value={slicedInputValue}
@@ -61,7 +61,7 @@ export function InputField({
                        placeholder-transparent outline-none transition'
             id={inputId}
             type='text'
-            placeholder={inputId}
+            placeholder={inputId ?? label}
             onChange={!isHittingInputLimit ? handleChange : undefined}
             value={slicedInputValue}
             onKeyUp={handleKeyboardShortcut}
@@ -75,7 +75,7 @@ export function InputField({
              dark:text-dark-secondary`,
             errorMessage
               ? '!text-accent-red peer-focus:text-accent-red'
-              : 'peer-focus:text-main-accent'
+              : 'peer-focus:text-white/50'
           )}
           htmlFor={inputId}
         >
