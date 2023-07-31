@@ -110,6 +110,7 @@ export function ViewPost(post: ViewPostProps): JSX.Element {
                 username={username}
                 hasImages={!!images}
                 createdBy={createdBy}
+                verified={verified}
               />
             </div>
           </div>
