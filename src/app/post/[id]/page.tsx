@@ -18,6 +18,8 @@ import { AnimatePresence } from "framer-motion";
 import { Post } from "@/components/post/post";
 import { Aside } from "@/components/aside/aside";
 import { AsideFooter } from "@/components/aside/aside-footer";
+import { SEO } from "@/components/common/seo";
+import { siteURL } from "@/components/lib/env";
 
 export default function UserPost()
 {
@@ -40,7 +42,7 @@ export default function UserPost()
         ),
         { allowNull: true }
     );
-    
+
     const { text, images } = postData ?? {};
     
     const imagesLength = images?.length ?? 0;
@@ -55,6 +57,7 @@ export default function UserPost()
     return (
         <MainLayout>
             <MainContainer>
+                <SEO title={`${postData?.user.name} on Vortex: "${postData?.text}. ${siteURL}/post/${postData?.id} / Vortex`} />
                 <MainHeader
                     title={parentId ? 'Thread' : 'Post'}
                     useActionButton

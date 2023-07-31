@@ -1,5 +1,6 @@
 'use client'
 
+import { SEO } from "@/components/common/seo";
 import { UserHomeLayout } from "@/components/layout/user/user-home-layout";
 import { useUser } from "@/components/lib/context/user-context";
 import { postsCollection } from "@/components/lib/firebase/collections";
@@ -27,6 +28,7 @@ export default function UserLikes() {
 
     return (
         <UserHomeLayout>
+            <SEO title={`Posts liked by ${name} (@${username}) / Vortex`} />
             <section>
                 {dataLoading ? (
                     <Loading />

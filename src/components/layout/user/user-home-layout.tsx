@@ -41,8 +41,8 @@ export function UserHomeLayout({
         ? { src: userData.photoURL, alt: userData.name }
         : null;
 
-    const currUserisBlocked = userData?.blockedUsers.includes(user?.id as string) as boolean;
-    const currUserBlockedUser = user?.blockedUsers.includes(userData?.id as string) as boolean;
+    const currUserisBlocked = userData?.blockedUsers?.includes(user?.id as string) as boolean;
+    const currUserBlockedUser = user?.blockedUsers?.includes(userData?.id as string) as boolean;
         
     return (
         <>

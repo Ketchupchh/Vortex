@@ -10,6 +10,7 @@ import { Post } from '@/components/post/post';
 import { Loading } from '@/components/ui/loading';
 import { StatsEmpty } from '@/components/post/stats-empty';
 import { UserHomeLayout } from '@/components/layout/user/user-home-layout';
+import { SEO } from '@/components/common/seo';
 
 export default function UserMedia(): JSX.Element {
   const { user } = useUser();
@@ -29,6 +30,7 @@ export default function UserMedia(): JSX.Element {
 
   return (
     <UserHomeLayout>
+      <SEO title={`Media Posts by ${name} (@${username}) / Vortex`} />
       <section>
         {loading ? (
           <Loading className='mt-5' />

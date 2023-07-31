@@ -296,6 +296,17 @@ export async function fetchUsers(username: string): Promise<User[]>{
   }
 }
 
+export async function clearAllBookmarks(userId: string): Promise<void> {
+  const bookmarksRef = userBookmarksCollection(userId);
+  const bookmarksSnapshot = await getDocs(bookmarksRef);
+
+  const batch = writeBatch(db);
+
+  bookmarksSnapshot.forEach(({ ref }) => batch.delete(ref));
+
+  await batch.commit();
+}
+
 export async function verifyUser(userId: string): Promise<void> {
   const userRef = doc(usersCollection, userId);
   await updateDoc(userRef, {

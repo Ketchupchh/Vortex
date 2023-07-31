@@ -9,9 +9,9 @@ import { MainContainer } from "../main-container";
 import { MainHeader } from "@/components/header/main-header";
 import { UserHeader } from "@/components/user/user-header";
 import { MainLayout } from "../main-layout";
-import type { ReactNode } from "react";
 import { Aside } from "@/components/aside/aside";
 import { AsideFooter } from "@/components/aside/aside-footer";
+import type { ReactNode } from "react";
 
 type UserDataLayoutProps = {
     children: ReactNode;

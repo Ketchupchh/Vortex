@@ -12,11 +12,14 @@ import { UserCard } from "@/components/user/user-card";
 import { useEffect, useMemo, useState } from "react";
 import { useArrayDocument } from "@/components/lib/hooks/useArrayDocument";
 import { AnimatePresence } from "framer-motion";
+import { SEO } from "@/components/common/seo";
 
 export default function UserAffliates() : JSX.Element
 {
     const { id } = useParams();
     const { user } = useUser();
+
+    const { name, username } = user ?? {};
 
     const [ ids, setIds ] = useState<string[]>([]);
 
@@ -40,7 +43,7 @@ export default function UserAffliates() : JSX.Element
                 return ids;
             });
     
-            const affliatesIds = affliatesArr?.map((aD) => {
+            affliatesArr?.map((aD) => {
                 aD.map((afId) => {
                     arr.push(afId);
                 })
@@ -61,6 +64,7 @@ export default function UserAffliates() : JSX.Element
 
     return (
         <UserHomeLayout>
+            <SEO title={`Affliates of ${name} (@${username}) / Vortex`} />
             <section>
                 {affliateLoading ? (
                     <Loading />
