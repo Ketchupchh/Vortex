@@ -1,3 +1,5 @@
+import * as DOMPurify from 'dompurify';
+
 type ParsedTextProps = {
   text: string;
   className?: string;
@@ -33,7 +35,7 @@ export function ParsedText({ text, className } : ParsedTextProps) : JSX.Element
     const urlsReplacedText = replacedText.replace(urlRegex, (match, url) => {
       return `<a class="mention" href="${url}" target="_blank" rel="noopener noreferrer" onClick="event.stopPropagation();">${url}</a>`;
     });
-    return sanitize(urlsReplacedText);
+    return DOMPurify.sanitize(urlsReplacedText, { USE_PROFILES: { html: true }});
   }
 
   const NewParsedText: React.FC = () => {
