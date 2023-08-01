@@ -18,6 +18,7 @@ import { PostDate } from './post-date';
 import type { Variants } from 'framer-motion';
 import type { User } from '../lib/types/user';
 import type { Post } from '../lib/types/post';
+import { ParsedText } from '../common/parsed-text';
 
 export type PostProps = Post & {
   modal?: boolean;
@@ -184,7 +185,7 @@ export function Post(post: PostProps): JSX.Element {
                 </p>
               )}
               {text && (
-                <p className='whitespace-pre-line break-words'>{text}</p>
+                <ParsedText className='whitespace-pre-line break-words' text={text} />
               )}
               <div className='mt-1 flex flex-col gap-2'>
                 {images && (

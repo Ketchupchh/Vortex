@@ -18,6 +18,7 @@ import { Input } from '@/components/input/input';
 import type { RefObject } from 'react';
 import type { User } from '@/components/lib/types/user';
 import type { Post } from '@/components/lib/types/post';
+import { ParsedText } from '@/components/common/parsed-text';
 
 type ViewPostProps = Post & {
   viewPostRef?: RefObject<HTMLElement>;
@@ -140,7 +141,7 @@ export function ViewPost(post: ViewPostProps): JSX.Element {
           )}
           <div>
             {text && (
-              <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
+              <ParsedText className='whitespace-pre-line break-words text-2xl' text={text} />
             )}
             {images && (
               <ImagePreview

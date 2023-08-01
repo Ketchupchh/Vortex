@@ -256,7 +256,7 @@ export function PostActions({
 
                       {!isOwner && (
                         <Popover.Button
-                          className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
+                          className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-blue
                                     hover:bg-main-sidebar-background'
                           as={Button}
                           onClick={preventBubbling(verified ? handleVerify(close, ownerId) : handleVerify(close, ownerId))}

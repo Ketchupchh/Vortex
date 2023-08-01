@@ -41,7 +41,7 @@ export function SidebarProfile() : JSX.Element
                                 open && 'bg-neutral-500/20'
                             )}
                         >
-                            {user && (
+                            {user ? (
                                 <div className='flex gap-3 truncate'>
                                     <UserAvatar className='flex w-14 h-14' src={user.photoURL} alt={user.username} isBusinessAccount={user.isBusinessAccount} />
                                     <div className='hidden truncate text-start leading-xl xl:block text-dark-secondary'>
@@ -54,6 +54,13 @@ export function SidebarProfile() : JSX.Element
                                             affliates={user.affliates}
                                         />
                                         <UserUsername username={user ? user.username : 'Guest'} disableLink />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className='flex gap-3 truncate items-center'>
+                                    <div className='rounded-full w-14 h-14 bg-neutral-600' />
+                                    <div className='hidden truncate text-start xl:block text-dark-secondary'>
+                                        <p className='text-xl font-bold'>Sign in</p>
                                     </div>
                                 </div>
                             )}

@@ -140,11 +140,11 @@ export function EditProfileModal({
             />
             <div
               className='group absolute aspect-square w-24 -translate-y-1/2
-                         overflow-hidden rounded-full xs:w-32 sm:w-36'
+                         overflow-hidden rounded-full xs:w-32 sm:w-36 ring-4 ring-black'
             >
               <NextImage
                 useSkeleton
-                className='h-full w-full bg-main-background inner:!m-1 inner:rounded-full'
+                className='h-full w-full bg-main-background inner:rounded-full'
                 imgClassName='rounded-full transition group-hover:brightness-75 duration-200
                               group-focus-within:brightness-75'
                 src={photoURL}

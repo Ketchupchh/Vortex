@@ -8,6 +8,13 @@
 
     --dark-background: 0 0 0;
     --light-background: 255 255 255;
+
+    --accent-yellow: 255 213 0;
+    --accent-blue: 29 155 240;
+    --accent-pink: 249 26 130;
+    --accent-purple: 120 87 255;
+    --accent-orange: 255 122 0;
+    --accent-green: 0 184 122;
   }
 
   a,
@@ -19,6 +26,10 @@
   
   body {
     @apply hover-animation bg-main-background text-light-primary dark:text-dark-primary;
+  }
+
+  .mention {
+    @apply text-accent-blue xs:hover:underline;
   }
 }
 

@@ -5,6 +5,7 @@ import type { User } from "../lib/types/user";
 import { formatDate } from "../lib/date";
 import { ToolTip } from "../ui/tooltip";
 import { UserFollowStats } from "./user-follow-stats";
+import { ParsedText } from "../common/parsed-text";
 
 type UserDetailsProps = Pick<
   User,
@@ -63,7 +64,7 @@ export function UserDetails({
                 </div>
             </div>
             <div className="flex flex-col gap-2">
-                {bio && <p className='whitespace-pre-line break-words'>{bio}</p>}
+                {bio && <ParsedText className="hitespace-pre-line break-words" text={bio} />}
                 {detailIcons.map(([detail, icon], index) =>
                     detail && (
                         <div
@@ -71,7 +72,7 @@ export function UserDetails({
                             className="flex items-center gap-1"
                         >
                             <i>
-                                <CustomIcon className="w-5 h-5" iconName={icon} />
+                                <CustomIcon className="w-5 h-5 text-dark-secondary" iconName={icon} />
                             </i>
                             {index === 1 ? (
                                 <a
@@ -83,7 +84,7 @@ export function UserDetails({
                                     {detail}
                                 </a>
                             ) : index === 2 ? (
-                                <button className='custom-underline group relative'>
+                                <button className='custom-underline group relative text-dark-secondary'>
                                     {detail}
                                     <ToolTip
                                         className='translate-y-1'

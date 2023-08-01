@@ -9,7 +9,7 @@ import { Loading } from "@/components/ui/loading";
 import { StatsEmpty } from "@/components/post/stats-empty";
 import { useUser } from "@/components/lib/context/user-context";
 import { UserCard } from "@/components/user/user-card";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useArrayDocument } from "@/components/lib/hooks/useArrayDocument";
 import { AnimatePresence } from "framer-motion";
 import { SEO } from "@/components/common/seo";

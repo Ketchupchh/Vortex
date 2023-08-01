@@ -8,7 +8,7 @@ import { MainHeader } from "@/components/header/main-header";
 import { Input } from "@/components/input/input";
 import { MainContainer } from "@/components/layout/main-container";
 import { MainLayout } from "@/components/layout/main-layout";
-import { AuthContextProvider, useAuth } from "@/components/lib/context/auth-context";
+import { useAuth } from "@/components/lib/context/auth-context";
 import { postsCollection } from "@/components/lib/firebase/collections";
 import { useInfiniteScroll } from "@/components/lib/hooks/useInfiniteScroll";
 import { Post } from "@/components/post/post";

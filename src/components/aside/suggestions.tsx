@@ -18,16 +18,16 @@ import { Error } from '../ui/error';
 import { MotionProps } from 'framer-motion'
 
 const variants: MotionProps = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    transition: { duration: 0.8 }
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.8 }
 };
 
 export function Suggestions(): JSX.Element {
   const { randomSeed } = useAuth();
 
   const { data: adminData, loading: adminLoading } = useDocument(
-    doc(usersCollection, 'Twt0A27bx9YcG4vu3RTsR7ifJzf2'),
+    doc(usersCollection, '2d40stkkbkgnWfA7339upj7h0Qj2'),
     { allowNull: true }
   );
 
@@ -43,26 +43,26 @@ export function Suggestions(): JSX.Element {
 
   return (
     <section className='hover-animation rounded-2xl bg-neutral-900'>
-        {adminLoading || suggestionsLoading ? (
-            <Loading className='flex h-52 items-center justify-center p-4' />
-        ) : suggestionsData ? (
-            <motion.div className='inner:px-4 inner:py-3' {...variants}>
-                <h2 className='text-xl font-bold'>Who to follow</h2>
-                {adminData && <UserCard {...adminData} />}
-                {suggestionsData?.map((userData) => (
-                    <UserCard {...userData} key={userData.id} />
-                ))}
-                <Link
-                    className='custom-button accent-tab hover-card block w-full rounded-2xl
-                                rounded-t-none text-center text-main-accent'
-                    href='/people'
-                >
-                    Show more
-                </Link>
-            </motion.div>
-        ) : (
-            <Error />
-        )}
+      {adminLoading || suggestionsLoading ? (
+        <Loading className='flex h-52 items-center justify-center p-4' />
+      ) : suggestionsData ? (
+        <motion.div className='inner:px-4 inner:py-3' {...variants}>
+          <h2 className='text-xl font-bold'>Who to follow</h2>
+          {adminData && <UserCard {...adminData} />}
+          {suggestionsData?.map((userData) => (
+            <UserCard {...userData} key={userData.id} />
+          ))}
+          <Link
+            className='custom-button accent-tab hover-card block w-full rounded-2xl
+                        rounded-t-none text-center text-main-accent'
+            href='/connect'
+          >
+            Show more
+          </Link>
+        </motion.div>
+      ) : (
+        <Error />
+      )}
     </section>
   );
 }

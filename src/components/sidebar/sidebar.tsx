@@ -45,6 +45,11 @@ const navLinks: Readonly<NavLink[]> = [
       linkName: 'Bookmarks',
       iconName: 'SaveIcon',
       canBeHidden: true
+    },
+    {
+        href: '/tournaments',
+        linkName: 'Tournaments',
+        iconName: 'Activity'
     }
 ];
 

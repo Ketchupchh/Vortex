@@ -23,6 +23,13 @@ module.exports = {
         'light-secondary': '#536471',
         'dark-border': '#2F3336',
         'light-border': '#EFF3F4',
+        'accent-yellow': 'rgb(var(--accent-yellow) / <alpha-value>)',
+        'accent-blue': 'rgb(var(--accent-blue) / <alpha-value>)',
+        'accent-pink': 'rgb(var(--accent-pink) / <alpha-value>)',
+        'accent-purple': 'rgb(var(--accent-purple) / <alpha-value>)',
+        'accent-orange': 'rgb(var(--accent-orange) / <alpha-value>)',
+        'accent-green': 'rgb(var(--accent-green) / <alpha-value>)',
+        'accent-red': '#F4212E',
       }
     },
   },
