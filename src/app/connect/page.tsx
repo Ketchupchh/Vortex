@@ -26,7 +26,7 @@ export default function Connect() : JSX.Element
 
     const { data, loading } = useInfiniteScroll(
         usersCollection,
-        [where('id', '!=', user?.id)],
+        [where('id', '!=', user?.id as string ?? 'null')],
         { allowNull: true, preserve: true },
         { marginBottom: 500 }
     );
